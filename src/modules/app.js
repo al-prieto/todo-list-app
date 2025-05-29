@@ -1,3 +1,5 @@
+import Todo from "./todo.js";
+
 let projects = [];
 let currentProjectId = null;
 
@@ -24,4 +26,14 @@ function getProject(projectId) {
   }
 }
 
-export { addProject, removeProject, getProject };
+function addTodoProject(todo, projectId) {
+  const project = getProject(projectId);
+  if (project) {
+    project.todos.push(todo);
+    console.log("Todo added:", todo);
+  } else {
+    console.warn("Could not add todo. Project not found.");
+  }
+}
+
+export { addProject, removeProject, getProject, addTodoProject };
