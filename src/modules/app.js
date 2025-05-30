@@ -36,4 +36,39 @@ function addTodoProject(todo, projectId) {
   }
 }
 
-export { addProject, removeProject, getProject, addTodoProject };
+function removeTodo(todoId, projectId) {
+  const project = getProject(projectId);
+  if (project) {
+    const index = project.todos.findIndex((e) => e.id === todoId);
+    if (index !== -1) {
+      project.todos.splice(index, 1);
+      console.log("Todo deleted");
+    }
+  } else {
+    console.warn("Todo not found in project.");
+  }
+}
+
+function toggleComplete(todoId, projectId) {
+  const project = getProject(projectId);
+  if (!project) {
+    console.warn("Project not found.");
+    return;
+  }
+  const todo = project.todos.find((t) => t.id === todoId);
+  if (!todo) {
+    console.warn("Todo not found.");
+    return;
+  }
+  todo.toggleComplete();
+  console.log("Todo completion status toggled.");
+}
+
+export {
+  addProject,
+  removeProject,
+  getProject,
+  addTodoProject,
+  removeTodo,
+  toggleComplete,
+};
