@@ -2,10 +2,11 @@ import "./styles/styles.css";
 import Todo from "./modules/todo.js";
 import Project from "./modules/project.js";
 import { addProject, addTodoProject } from "./modules/app.js";
+import { renderTodoList } from "./ui/dom.js";
 
 const testTodo = new Todo(
   "Buy milk",
-  "Don't forget the lactores-free one",
+  "Don't forget the lactose-free one",
   "2025-06-01",
   "high",
   "default"
@@ -30,3 +31,7 @@ const testAddTodoProject = new Todo(
 addTodoProject(testAddTodoProject, testProject.id);
 
 console.log("Look at me ", testProject);
+
+const mockTodos = [testTodo, testAddTodoProject];
+
+renderTodoList(mockTodos);

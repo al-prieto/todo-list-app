@@ -16,7 +16,20 @@ export function renderTodoList(todos) {
 
   todos.forEach(todo => {
     const todoElement = document.createElement('li');
-    todoElement.innerText = todo.title;
+    const todoTitle = document.createElement('h3');
+    todoTitle.innerText = todo.title;
+    todoElement.appendChild(todoTitle);
+    const todoDueDate = document.createElement('p');
+    todoDueDate.innerText = todo.dueDate;
+    todoElement.appendChild(todoDueDate);
+    const todoPriority = document.createElement('p');
+    todoPriority.innerText = todo.priority;
+    todoElement.appendChild(todoPriority);
+
+    todoListContainer.appendChild(todoElement)
+
+    
+
 
   })
 }
