@@ -1,0 +1,409 @@
+/* General Body & Typography */
+body {
+    font-family: 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; /* Similar to Notion's clean sans-serif */
+    margin: 0;
+    padding: 0;
+    background-color: #f6f8fa; /* Light grey background, common in minimal UIs */
+    color: #333; /* Darker text for readability */
+    line-height: 1.6;
+    display: flex; /* Use flexbox for main layout */
+    min-height: 100vh; /* Ensure full viewport height */
+}
+
+/* Global Container (optional, but good for centering content if needed) */
+#app-container {
+    display: flex;
+    width: 100%;
+    max-width: 1200px; /* Max width for content area */
+    margin: 0 auto; /* Center the container */
+    background-color: #fff; /* White background for the main app area */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06); /* Subtle shadow */
+    border-radius: 8px; /* Slightly rounded corners */
+    overflow: hidden; /* Prevent content overflow */
+}
+
+/* Sidebar for Projects */
+#sidebar {
+    width: 250px; /* Fixed width for sidebar */
+    background-color: #f7f7f7; /* Slightly different background for sidebar */
+    padding: 20px 15px;
+    border-right: 1px solid #eee; /* Separator line */
+    display: flex;
+    flex-direction: column;
+}
+
+#sidebar h2 {
+    font-size: 1.4em;
+    color: #555;
+    margin-bottom: 20px;
+    font-weight: 600; /* Slightly bolder for titles */
+}
+
+/* Project List */
+#project-list {
+    list-style: none; /* Remove default list bullets */
+    padding: 0;
+    margin: 0;
+    flex-grow: 1; /* Allow list to take available space */
+    overflow-y: auto; /* Scroll if projects overflow */
+}
+
+.project-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    margin-bottom: 5px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    position: relative; /* For delete button positioning */
+    gap: 10px; /* Space between name and delete button */
+}
+
+.project-item:hover {
+    background-color: #e8e8e8;
+}
+
+.project-item.active {
+    background-color: #d1e4fd; /* A light blue for active item */
+    color: #216be0; /* Darker blue text */
+    font-weight: 500;
+}
+
+/* Project Name Display (for inline editing) */
+.project-name-display {
+    flex-grow: 1; /* Allows the name to take up most space */
+    padding-right: 5px; /* Little padding before button */
+    white-space: nowrap; /* Prevent name from wrapping */
+    overflow: hidden; /* Hide overflowed text */
+    text-overflow: ellipsis; /* Add ellipsis for overflowed text */
+}
+
+/* Project Rename Input */
+.project-rename-input {
+    flex-grow: 1;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.95em;
+    font-family: inherit; /* Inherit body font */
+    box-sizing: border-box; /* Include padding/border in element's total width */
+}
+
+/* Project Delete Button */
+.delete-project-btn {
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 0.9em;
+    padding: 5px;
+    cursor: pointer;
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.2s ease, color 0.2s ease;
+    margin-left: auto; /* Pushes button to the right */
+}
+
+.project-item:hover .delete-project-btn {
+    opacity: 1; /* Show on hover */
+}
+
+.delete-project-btn:hover {
+    color: #e74c3c; /* Red on hover */
+}
+
+/* Add Project Button/Form */
+#add-project-form {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    text-align: center;
+}
+
+#add-project-input {
+    width: calc(100% - 10px);
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: inherit;
+}
+
+#add-project-btn {
+    background-color: #4CAF50; /* Green for add */
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease;
+}
+
+#add-project-btn:hover {
+    background-color: #45a049;
+}
+
+
+/* Main Content Area for Todos */
+#main-content {
+    flex-grow: 1; /* Takes remaining space */
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+#main-content h1 {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+/* ToDo List */
+#todo-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+    overflow-y: auto; /* Scroll if todos overflow */
+}
+
+.todo-item {
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.todo-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* ToDo Summary (always visible part) */
+.todo-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Spreads elements */
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
+    cursor: pointer; /* Indicates it's expandable */
+}
+
+.todo-summary h3 {
+    margin: 0;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #444;
+    flex-grow: 1; /* Title takes most space */
+    margin-right: 15px; /* Space before date/priority */
+}
+
+.todo-summary p {
+    margin: 0;
+    font-size: 0.9em;
+    color: #777;
+    margin-left: 15px; /* Space from title */
+}
+
+.todo-summary label {
+    display: flex;
+    align-items: center;
+    font-size: 0.9em;
+    color: #555;
+    gap: 5px; /* Space between label text and checkbox */
+}
+
+.todo-summary input[type="checkbox"] {
+    transform: scale(1.2); /* Slightly larger checkbox */
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+/* ToDo Details (hidden by default) */
+.todo-details {
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+    margin-top: 15px;
+}
+
+.todo-details p {
+    font-size: 0.95em;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+/* ToDo Buttons */
+.delete-todo-btn,
+.edit-todo-btn {
+    background: none;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 0.85em;
+    margin-left: 10px; /* Space between buttons */
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.delete-todo-btn {
+    color: #e74c3c;
+    border-color: #e74c3c;
+}
+
+.delete-todo-btn:hover {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.edit-todo-btn {
+    color: #3498db;
+    border-color: #3498db;
+}
+
+.edit-todo-btn:hover {
+    background-color: #3498db;
+    color: white;
+}
+
+/* ToDo Edit Form */
+.todo-edit-form {
+    padding: 15px 0;
+    border-top: 1px solid #eee;
+    margin-top: 15px;
+}
+
+.todo-edit-form label {
+    display: block;
+    font-size: 0.9em;
+    color: #555;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    font-weight: 500;
+}
+
+.todo-edit-form input[type="text"],
+.todo-edit-form input[type="date"],
+.todo-edit-form textarea,
+.todo-edit-form select {
+    width: calc(100% - 20px); /* Account for padding */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 0.95em;
+    box-sizing: border-box; /* Ensures padding doesn't increase total width */
+}
+
+.todo-edit-form textarea {
+    min-height: 60px;
+    resize: vertical; /* Allow vertical resizing */
+}
+
+.todo-edit-form button {
+    padding: 10px 15px;
+    margin-top: 15px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease;
+}
+
+.todo-edit-form .save-todo-btn {
+    background-color: #28a745; /* Green */
+    color: white;
+}
+
+.todo-edit-form .save-todo-btn:hover {
+    background-color: #218838;
+}
+
+.todo-edit-form .cancel-todo-btn {
+    background-color: #6c757d; /* Grey */
+    color: white;
+}
+
+.todo-edit-form .cancel-todo-btn:hover {
+    background-color: #5a6268;
+}
+
+/* Add ToDo Form (at the bottom of main content) */
+#add-todo-form {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#add-todo-form input,
+#add-todo-form textarea,
+#add-todo-form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+#add-todo-form button {
+    background-color: #007bff; /* Blue for add todo */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.2s ease;
+}
+
+#add-todo-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Utility Classes for Priority Colors (optional but good) */
+/* You would add these classes to your todo-item based on todo.priority */
+.todo-priority-low {
+    border-left: 5px solid #28a745; /* Green */
+}
+.todo-priority-medium {
+    border-left: 5px solid #ffc107; /* Orange/Yellow */
+}
+.todo-priority-high {
+    border-left: 5px solid #dc3545; /* Red */
+}
+
+/* For small screens */
+@media (max-width: 768px) {
+    #app-container {
+        flex-direction: column;
+        max-width: none;
+        margin: 0;
+        border-radius: 0;
+    }
+
+    #sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+    }
+
+    #main-content {
+        padding: 20px;
+    }
+
+    .project-item {
+        padding: 8px 10px;
+    }
+
+    .todo-item {
+        padding: 10px 15px;
+    }
+}

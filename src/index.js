@@ -1,37 +1,58 @@
+// index.js
+
+// Import CSS styles.
 import "./styles/styles.css";
-import Todo from "./modules/todo.js";
+
+// Import core application logic functions.
+import { addProject, getProjects, getProject, loadProjectsFromLocalStorage } from "./modules/app.js";
+
+// Import DOM rendering functions.
+import { renderProjectList, renderTodoList } from "./ui/dom.js";
+
+// Import functions to set up form handlers.
+import { setupProjectFormHandler, setupTodoFormHandler } from "./ui/ui-controller.js";
+
+// Import Project and Todo classes for object instantiation.
 import Project from "./modules/project.js";
-import { addProject, addTodoProject } from "./modules/app.js";
-import { renderTodoList } from "./ui/dom.js";
+import Todo from "./modules/todo.js";
 
-const testTodo = new Todo(
-  "Buy milk",
-  "Don't forget the lactose-free one",
-  "2025-06-01",
-  "high",
-  "default"
-);
 
-console.log(testTodo);
+// Initialize the application after the DOM is fully loaded.
+document.addEventListener('DOMContentLoaded', () => {
 
-const testProject = new Project("Growth");
+    // Load projects from localStorage.
+    loadProjectsFromLocalStorage();
 
-addProject(testProject);
+    // Determine the initial project to display.
+    let projects = getProjects();
+    let initialProject = null;
 
-console.log(testProject);
+    if (projects.length === 0) {
+        // Create a default project if none are found.
+        const defaultProject = new Project("Inbox");
+        addProject(defaultProject);
+        initialProject = defaultProject;
+        console.log("Default 'Inbox' project created.");
+    } else {
+        // Use the first loaded project as the initial one.
+        initialProject = projects[0];
+    }
 
-const testAddTodoProject = new Todo(
-  "GSAP Project",
-  "Bring some projects inspiration",
-  "2025-05-31",
-  "high",
-  "default"
-);
+    // Set up UI form handlers.
+    setupProjectFormHandler();
+    setupTodoFormHandler();
 
-addTodoProject(testAddTodoProject, testProject.id);
-
-console.log("Look at me ", testProject);
-
-const mockTodos = [testTodo, testAddTodoProject];
-
-renderTodoList(mockTodos);
+    // Render initial UI based on the determined project.
+    if (initialProject) {
+        const selectedProject = getProject(initialProject.id); // Ensures current project in app.js is set.
+        renderProjectList(getProjects());
+        if (selectedProject) {
+            renderTodoList(selectedProject.todos);
+        } else {
+            renderTodoList([]);
+        }
+    } else {
+        renderProjectList([]);
+        renderTodoList([]);
+    }
+});

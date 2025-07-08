@@ -1,15 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Todo App</title>
-  </head>
-  <body>
-    <h1>Todo List App</h1>
-    <div id="app">
-      <div id="project-list"></div>
-      <div id="todo-list"></div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My ToDo App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/styles.css">
+</head>
+<body>
+    <div id="app-container">
+        <aside id="sidebar">
+            <h2>Projects</h2>
+            <div id="project-list">
+                </div>
+            <form id="add-project-form">
+                <input type="text" id="add-project-input" placeholder="New Project Name" required>
+                <button type="submit" id="add-project-btn">Add Project</button>
+            </form>
+        </aside>
+
+        <main id="main-content">
+            <h1>Current Project Todos</h1>
+            <ul id="todo-list">
+                </ul>
+            <form id="add-todo-form">
+                <input type="text" id="add-todo-title" placeholder="Todo Title" required>
+                <textarea id="add-todo-description" placeholder="Description"></textarea>
+                <input type="date" id="add-todo-dueDate">
+                <select id="add-todo-priority">
+                    <option value="low">Low Priority</option>
+                    <option value="medium" selected>Medium Priority</option>
+                    <option value="high">High Priority</option>
+                </select>
+                <textarea id="add-todo-notes" placeholder="Notes"></textarea>
+                <button type="submit" id="add-todo-btn">Add Todo</button>
+            </form>
+        </main>
     </div>
-  </body>
+    <script src="./index.js"></script> </body>
 </html>
